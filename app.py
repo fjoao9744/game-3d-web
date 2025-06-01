@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
+import os
 
 app = Flask("__name__")
 app.config['SECRET_KEY'] = 'segredo'
@@ -31,5 +32,5 @@ if __name__ == "__main__":
     import eventlet.wsgi
     import sys
 
-    # só para rodar localmente com eventlet (prod: usar um servidor apropriado)
-    socketio.run(app, host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    socketio.run(app, host="0.0.0.0", port=port)
