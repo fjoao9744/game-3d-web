@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
 import os
 
-app = Flask("__name__")
+app = Flask(__name__)
 app.config['SECRET_KEY'] = 'segredo'
 socketio = SocketIO(app, cors_allowed_origins="*")
 
@@ -27,10 +27,5 @@ def on_player_move(data):
     print('Movimento do player:', data)
     emit('update_player', data, broadcast=True, include_self=False)
 
-if __name__ == "__main__":
-    import eventlet
-    import eventlet.wsgi
-    import sys
-
-    port = int(os.environ.get("PORT", 5000))
-    socketio.run(app, host="0.0.0.0", port=port)
+port = int(os.environ.get("PORT", 5000))
+socketio.run(app, host="0.0.0.0", port=port)

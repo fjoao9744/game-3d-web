@@ -9,7 +9,7 @@ document.body.appendChild(renderer.domElement);
 
 camera.position.z = 5;
 
-const socket = io('https://game-3d-web-production.up.railway.app');
+const socket = io();
 
 socket.on('connect', () => {
     console.log('Conectado ao servidor WebSocket');
